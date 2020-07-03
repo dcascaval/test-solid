@@ -148,7 +148,7 @@ const Collapse = ({ open, children }: CollapseProps) => {
 };
 
 const VirtualList = () => {
-  let rows = 100;
+  let rows = 1000;
   let [display, setDisplay] = createSignal(0);
 
   return (
@@ -165,11 +165,13 @@ const VirtualList = () => {
       <div
         className="fake-scroll"
         onClick={(e) => console.log(e.clientX, e.clientY)}
-        onScroll={(e) => {
-          console.log(e.target.scrollTop);
-          setDisplay(Math.round(e.target.scrollTop / 50));
-        }}>
-        <div style={{ width: "1px", height: "5000px" }}></div>
+        onScroll={(e) =>
+          requestAnimationFrame(() => {
+            console.log(e.target.scrollTop);
+            setDisplay(Math.round(e.target.scrollTop / 50));
+          })
+        }>
+        <div style={{ width: "1px", height: `${rows * 50}px` }}></div>
       </div>
     </div>
   );
