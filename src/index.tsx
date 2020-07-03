@@ -1,10 +1,4 @@
-import {
-  createSignal,
-  onCleanup,
-  createState,
-  SetStateFunction,
-  State,
-} from "solid-js";
+import { createSignal, onCleanup, createState, SetStateFunction, State } from "solid-js";
 import "../src/main.scss";
 import { render } from "solid-js/dom";
 
@@ -22,8 +16,7 @@ function useTick(delay: number) {
 type Setter<T> = (i: number, j: number, value: T) => void;
 let [maxElement, setMaxElement] = createSignal(0);
 
-const zeros = (dimension: number) =>
-  range(0, dimension, () => range(0, dimension, () => 0));
+const zeros = (dimension: number) => range(0, dimension, () => range(0, dimension, () => 0));
 
 function use2DArray(input: number[][]): [State<number[][]>, Setter<number>] {
   const [data, setData] = createState(input);
@@ -87,8 +80,7 @@ const ElementGrid = ({ dimension }: { dimension: number }) => {
             <div class="row">
               {range(0, dimension, (j) => {
                 const value = () => data[i][j];
-                const color = () =>
-                  maxElement() === 0 ? 0 : value() / maxElement();
+                const color = () => (maxElement() === 0 ? 0 : value() / maxElement());
                 const textColor = () => (color() > 0.4 ? "#ddd" : "#222");
                 return (
                   <div
@@ -104,8 +96,7 @@ const ElementGrid = ({ dimension }: { dimension: number }) => {
                       setData(d - j, d - i, data[i][j] + 1);
                       e.preventDefault();
                       e.stopPropagation();
-                    }}
-                  >
+                    }}>
                     <span>{value()}</span>
                   </div>
                 );
@@ -132,8 +123,7 @@ const Collapse = ({ open, children }: CollapseProps) => {
       onClick={() => {
         setIsOpen(!isOpen());
         // console.log(isOpen());
-      }}
-    >
+      }}>
       {children}
     </div>
   );
@@ -142,16 +132,13 @@ const Collapse = ({ open, children }: CollapseProps) => {
   // because if it is not, it cannot be re-evaluated.
   const result = () => (
     <Frame>
-      <span style={{ display: "block", margin: "20px", "z-index": 2 }}>
-        Click to {isOpen() ? "Close" : "Open"}
-      </span>
+      <span style={{ display: "block", margin: "20px", "z-index": 2 }}>Click to {isOpen() ? "Close" : "Open"}</span>
       <div
         className={"expand"}
         style={{
           "max-height": isOpen() ? "570px" : "0px",
           opacity: isOpen() ? 1 : 0,
-        }}
-      >
+        }}>
         {children}
       </div>
     </Frame>
