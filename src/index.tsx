@@ -1,4 +1,4 @@
-import { createSignal, onCleanup, createState, SetStateFunction, State } from "solid-js";
+import { createSignal, onCleanup, createState, SetStateFunction, State, For } from "solid-js";
 import "../src/main.scss";
 import { render } from "solid-js/dom";
 
@@ -147,11 +147,35 @@ const Collapse = ({ open, children }: CollapseProps) => {
   return result;
 };
 
-const app = () => (
-  <Collapse open={false}>
-    <ElementGrid dimension={10} />
-  </Collapse>
-);
+const VirtualList = () => {
+  let rows = 100;
+  let [display, setDisplay] = createSignal(0);
+
+  return (
+    <div className="list-container" style={{ "max-height": "501px", width: "514px" }}>
+      <div>
+        {range(0, 10, (i) => (
+          <div style={{ height: "49px" }} className="grid-row">
+            {range(0, 10, (j) => (
+              <span>{`${display() + i}.${j}`}</span>
+            ))}
+          </div>
+        ))}
+      </div>
+      <div
+        className="fake-scroll"
+        onClick={(e) => console.log(e.clientX, e.clientY)}
+        onScroll={(e) => {
+          console.log(e.target.scrollTop);
+          setDisplay(Math.round(e.target.scrollTop / 50));
+        }}>
+        <div style={{ width: "1px", height: "5000px" }}></div>
+      </div>
+    </div>
+  );
+};
+
+const app = () => <VirtualList />;
 
 let element = document.getElementById("main");
 if (element) {
