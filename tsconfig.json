@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "typed",
+    "baseUrl": ".",
+    "incremental": true,
+    "target": "ES5",
+    "lib": ["ES2015", "DOM"],
+    "paths": {
+      "*": ["node_modules/*"]
+    },
+    "jsx": "preserve"
+  },
+  "include": ["src/**/*"]
+}

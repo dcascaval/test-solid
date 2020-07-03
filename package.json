@@ -1,0 +1,32 @@
+{
+  "name": "test-solid",
+  "version": "0.1.0",
+  "description": "?",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "babel-preset-solid": "^0.18.4",
+    "solid-js": "^0.18.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "babel-loader": "^8.1.0",
+    "common-js": "^0.3.8",
+    "sass": "^1.26.9",
+    "sass-loader": "^8.0.2",
+    "typescript": "^3.9.3",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "scripts": {
+    "build": "tsc && webpack --config webpack.config.js --mode=development"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "solid"
+    ]
+  }
+}
